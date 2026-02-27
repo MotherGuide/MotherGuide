@@ -95,8 +95,8 @@ a {
 }
 
 .logo img {
-    width: 40px;
-    margin-right: 10px;
+    width: 100px;
+    margin-right: -20px;
 }
 
 .nav-links{
@@ -223,16 +223,22 @@ main{
 
 /* ===== Dashboard ===== */
 .dashboard-container {
-    padding: 20px 60px;
+    padding: 20px 20px;
 }
 
 .welcome-box {
     background:  rgba(0, 0, 0, 0.65);
     padding: 15px;
     border-radius: 10px;
-    /* margin-bottom: 30px; */
+    margin-left: 100px;
     width: 300px;
     color: #ffffff;
+}
+
+.comment-section{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .comment-cards {
@@ -274,6 +280,19 @@ main{
     width: 20px;
     height: 20px;
     margin: 0 5px;
+}
+
+.direction-arrows{
+    width: 60px;
+    height: 60px;
+    background-color: rgba(242, 242, 242, 0.5);
+    border-radius: 50%;
+    margin: 0 20px;
+    cursor: pointer;
+}
+
+.direction-arrows.disabled{
+    cursor:not-allowed;
 }
 
 /* ===== Admin Panel ===== */
