@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MotherGuide</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://kit.fontawesome.com/8eed1c1f47.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header id="navbar">
+        <div class="nav-left">
+            <div class="logo">
+                <img src="images/logo.png">
+                MotherGuide
+            </div>
+        </div>
+        <div class="nav-center">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Resources</a>
+            <a href="#">Contact</a>
+        </div>
+        <div class="nav-right">
+            <a class="btn btn-primary" href="#">Register</a>
+            <a class="btn btn-secondary" href="#">Admin Login</a>
+        </div>
+    </header>
+
+    <main>
+
+        <div class="hero">
+            <div class="hero-text">
+                <h1>Welcome to <br>MotherGuide</h1>
+                <p>Your trusted pregnancy education companion.</p>
+                <div class="hero-buttons">
+                    <a class="btn btn-primary">Register as Mother</a>
+                    <a class="btn btn-secondary">Admin Login</a>
+                </div>
+            </div>
+            <!-- <img src="images/hero-mother.png"> -->
+            <!-- <img src="images/2.png" style="width: 500px;"> -->
+        </div>
+
+        <div class="cards">
+            <div class="card">
+                <!-- <img src="images/nutrition.png"> -->
+                <!-- <i class="fa-solid fa-apple-whole card-icons"></i> -->
+                <img src="icons/apple-whole-solid-full.svg">
+                <h3>Nutrition Tips</h3>
+                <p>Healthy food guidance for you and baby.</p>
+                <a href="./tips.html" class="btn btn-primary">Read More</a>
+            </div>
+
+            <div class="card">
+                <!-- <img src="images/warning.png"> -->
+                <!-- <i class="fa-solid fa-triangle-exclamation card-icons"></i> -->
+                <img src="icons/triangle-exclamation-solid-full.svg">
+                <h3>Warning Signs</h3>
+                <p>Know when to seek medical help.</p>
+                <a href="./tips.html" class="btn btn-primary">View</a>
+            </div>
+
+            <div class="card">
+                <!-- <img src="images/birth.png"> -->
+                <!-- <i class="fa-solid fa-baby card-icons"></i> -->
+                <img src="icons/baby-solid-full.svg">
+                <h3>Preparing for Delivery</h3>
+                <p>Birth checklist and planning tips.</p>
+                <a href="./tips.html" class="btn btn-primary">Read More</a>
+            </div>
+
+            <div class="card">
+                <!-- <img src="images/baby.png"> -->
+                <!-- <i class="fa-solid fa-person-breastfeeding card-icons"></i> -->
+                <img src="icons/person-breastfeeding-solid-full.svg">
+                <h3>Baby Care</h3>
+                <p>After delivery care guidance.</p>
+                <a href="./tips.html" class="btn btn-primary">Read More</a>
+            </div>
+        </div>
+
+        <div class="emergency">
+            <!-- <i class="fa-solid fa-triangle-exclamation emergency-icon"></i>  --> 
+            <img src="icons/triangle-exclamation-solid-full.svg" class="emergency-icon"> 
+            Emergency? View Danger Signs or Call Health Worker
+        </div>
+
+    </main>
+
+    <script>
+        window.addEventListener("scroll", function() {
+            const navbar = document.getElementById("navbar");
+            const navleft1 = document.getElementById("nav-left-1");
+
+            if (window.scrollY > 40) {
+                navbar.classList.add("scrolled");
+                // navleft1.classList.remove('hidden');
+            } else {
+                navbar.classList.remove("scrolled");
+                // navleft1.classList.add('hidden');
+            }
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+CREATE DATABASE IF NOT EXISTS MotherGuideDB;
+USE MotherGuideDB;
+
+CREATE TABLE users (
+    id VARCHAR(5) PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    sign_up_day ENUM('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday') NOT NULL,
+    sign_up_date DATE NOT NULL,
+    pregnancy_week INT DEFAULT 0
+);
+
+CREATE TABLE tips (
+    id VARCHAR(5) PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
+    like_count INT DEFAULT 0,
+    dislike_count INT DEFAULT 0,
+    comment_count INT DEFAULT 0,
+    pregnancy_week INT NOT NULL,
+    views INT DEFAULT 0
+);
+
+CREATE TABLE comments (
+    id VARCHAR(5) PRIMARY KEY,
+    comment_content TEXT NOT NULL,
+    user_id VARCHAR(5) NOT NULL,
+    tip_id VARCHAR(5) NOT NULL,
+
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (tip_id) REFERENCES tips(id) ON DELETE CASCADE
+);
