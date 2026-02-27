@@ -28,38 +28,50 @@
     <main>
         <div class="dashboard-container">
             <div class="welcome-box">
-                <h2>Welcome, Sarah</h2>
-                <p>You are in Week 18 (Second Trimester)</p>
-
-                <div class="progress-bar">
-                    <div class="progress"></div>
-                </div>
+                <h2 id="name">Sarah</h2>
+                <p>You are in week <span id="pregnancy_week">18</span> of your pregnancy</p>
             </div>
 
-            <div class="cards">
-                <div class="card">
-                    <!-- <img src="images/nutrition.png"> -->
-                    <i class="fa-solid fa-apple-whole card-icons"></i>
-                    <h3>Nutrition Tips</h3>
-                    <p>Healthy food advice this week.</p>
-                    <a class="btn btn-primary">Read More</a>
-                </div>
+            <div class="comment-cards">
+                <div class="comment-card">
+                    <span>
+                        <h2 class="tip-title">Eat for Two — But Eat Smart, Not Double</h2>
+                        <span class="card_pregnancy_week_lable"></span>
+                    </span>
+                    <p class="tip-content">
+                        During pregnancy, your body needs extra nutrients — but that doesn’t mean you should double your food portions. Instead of eating twice as much, focus on eating twice as healthy.
+                        <br>
+                        <br>
+                        A balanced pregnancy diet should include:
+                        <br>Iron-rich foods – such as beans, spinach, liver, and fortified cereals to prevent anemia.
+                        <br>Calcium sources – like milk, yogurt, and small fish with bones to support your baby’s bone development.
+                        <br>Protein – from eggs, beans, groundnuts, fish, or lean meat to help your baby grow properly.
+                        <br>Fruits and vegetables – rich in vitamins and fiber to boost immunity and prevent constipation.
+                        <br>Plenty of clean water – to stay hydrated and support increased blood volume.
+                    </p>
+                    <div class="stats">
+                        <div class="stat likes">
+                            <img src="./icons/thumbs-up-regular-full.svg" alt="">
+                            <span class="likes-count">100</span>
+                        </div>
+                        <div class="stat dislikes">
+                            <img src="./icons/thumbs-down-regular-full.svg" alt="">
+                            <span class="dislikes-count">20</span>
+                        </div>
+                        <div class="stat comments">
+                            <img src="./icons/comment-dots-solid-full.svg" alt="">
+                            <span class="comments-count">45</span>
+                        </div>
+                        <div class="stat views">
+                            <img src="./icons/eye-solid-full.svg" alt="">
+                            <span class="views-count">526</span>
+                        </div>
 
-                <div class="card">
-                    <!-- <img src="images/warning.png"> -->
-                    <i class="fa-solid fa-triangle-exclamation card-icons"></i>
-                    <h3>Warning Signs</h3>
-                    <p>When to seek help.</p>
-                    <a class="btn btn-primary">View</a>
-                </div>
+                    </div>
 
-                <div class="card">
-                    <!-- <img src="images/birth.png"> -->
-                    <i class="fa-solid fa-baby card-icons"></i>
-                    <h3>Preparing for Delivery</h3>
-                    <p>Checklist for birth preparation.</p>
-                    <a class="btn btn-primary">Read More</a>
                 </div>
+                <div class="comment-card hidden"></div>
+                <div class="comment-card hidden"></div>
             </div>
         </div>
     </main>
