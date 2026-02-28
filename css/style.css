@@ -84,7 +84,7 @@ a {
     gap: 15px;
 }
 
-
+/* =========== Logo =========== */
 .logo {
     display: flex;
     align-items: center;
@@ -98,6 +98,16 @@ a {
     margin-right: -20px;
 }
 
+/* =========== Profile Picture =========== */
+.profile-picture{
+    border-radius: 50%;
+    width: 35px;
+    padding: 3px;
+    background-color: #ffffff;
+    color: #000000;
+}
+
+/* =========== Nav links =========== */
 .nav-links{
     display: flex;
     flex-direction: row;
