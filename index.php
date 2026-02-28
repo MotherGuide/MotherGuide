@@ -1,3 +1,8 @@
+<?php
+session_start();
+$loggedIn = isset($_SESSION["user_id"]);
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,7 +34,14 @@
 
         <div class="hero">
             <div class="hero-text">
-                <h1>Welcome to <br>MotherGuide</h1>
+
+                <?php if ($loggedIn): ?>
+                    <h1>Welcome back, <?php echo htmlspecialchars($_SESSION["user_name"]); ?>!</h1>
+                    <p>Your current pregnancy week: <?php echo $_SESSION["pregnancy_week"]; ?></p>
+                <?php else: ?>
+                    <h1>Welcome to <br> MotherGuide</h1>
+                <?php endif; ?>
+                
                 <p>Your trusted pregnancy education companion.</p>
                 <div class="hero-buttons">
                     <a class="btn btn-primary" href="./auth.html">Register as Mother</a>

@@ -359,7 +359,7 @@
         </div>
 
         <!-- ======= LOGIN ======= -->
-        <div class="form-panel active" id="login-form">
+        <form action="./api/login.php" method="post" class="form-panel active" id="login-form">
 
             <div class="input-group">
                 <label>Email Address</label>
@@ -430,16 +430,16 @@
                 </button>
             </div>
 
-        </div>
+        </form>
 
         <!-- ======= SIGNUP ======= -->
-        <div class="form-panel" id="signup-form">
+        <form action="./api/signup.php" method="post" class="form-panel" id="signup-form">
 
             <div class="input-group">
                 <label>Full Name</label>
                 <div class="input-wrap">
                     <i class="fa-regular fa-user icon"></i>
-                    <input type="text" placeholder="Sarah Namuli">
+                    <input name="full-name" type="text" placeholder="Sarah Namuli">
                 </div>
             </div>
 
@@ -447,7 +447,7 @@
                 <label>Email Address</label>
                 <div class="input-wrap">
                     <i class="fa-regular fa-envelope icon"></i>
-                    <input type="email" placeholder="sarah@example.com">
+                    <input name="email" type="email" placeholder="sarah@example.com">
                 </div>
             </div>
 
@@ -455,7 +455,7 @@
                 <label>Password</label>
                 <div class="input-wrap">
                     <i class="fa-solid fa-lock icon"></i>
-                    <input type="password" id="signup-pw" placeholder="Create a strong password">
+                    <input name="password" type="password" id="signup-pw" placeholder="Create a strong password">
                     <i class="fa-regular fa-eye toggle-pw" onclick="togglePw('signup-pw', this)"></i>
                 </div>
             </div>
@@ -464,7 +464,7 @@
                 <label>Week of Pregnancy</label>
                 <div class="input-wrap">
                     <i class="fa-solid fa-calendar-heart icon"></i>
-                    <select>
+                    <select name="pregnancy-week">
                         <option value="">Select your current week…</option>
                         <optgroup label="First Trimester (Weeks 1–12)">
                             <option>Week 1</option><option>Week 2</option><option>Week 3</option>
@@ -512,7 +512,7 @@
                 </button>
             </div>
 
-        </div>
+        </form>
 
     </div>
 </main>
