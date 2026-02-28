@@ -9,9 +9,8 @@
 body {
     /* background: #f8f4f7; */
     color: #333;
-    background: url(../images/6.png);
+    background: url(../images/bg.png);
     background-repeat: no-repeat;
-    background-size: contain;
     background-size: 100% auto;
     background-position: center;
     overflow-x: hidden;
