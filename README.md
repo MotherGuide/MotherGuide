@@ -47,10 +47,7 @@ A basic PHP web project with user **signup**, **login**, **logout**, and secure 
      ```sql
      CREATE DATABASE motherguide;
      ```
-   - Import the provided SQL schema:
-     ```bash
-     mysql -u root -p motherguide < database/schema.sql
-     ```
+   - Import the provided SQL schema from the DB_Creation.txt file.
 
 3. **Configure the database connection**
    - Edit `..php/Database.php` with your credentials:
