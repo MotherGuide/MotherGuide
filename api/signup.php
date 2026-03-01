@@ -1,7 +1,7 @@
 <?php
 
-require_once("./php/Database.php");
-require_once("./php/User.php");
+require_once(__DIR__ . '/../php/Database.php');
+require_once(__DIR__ . '/../php/User.php');
 
 date_default_timezone_set("Africa/Kampala");
 

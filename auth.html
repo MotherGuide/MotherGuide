@@ -320,7 +320,7 @@
         </a>
     </div>
     <div class="nav-center">
-        <a href="index.html">Home</a>
+        <a href="index.php">Home</a>
         <a href="#">About</a>
         <a href="#">Resources</a>
         <a href="#">Contact</a>
@@ -361,76 +361,75 @@
         <!-- ======= LOGIN ======= -->
         <form action="./api/login.php" method="post" class="form-panel active" id="login-form">
 
-            <div class="input-group">
-                <label>Email Address</label>
-                <div class="input-wrap">
-                    <i class="fa-regular fa-envelope icon"></i>
-                    <input type="email" placeholder="sarah@example.com">
-                </div>
-            </div>
+    <div class="input-group">
+        <label>Email Address</label>
+        <div class="input-wrap">
+            <i class="fa-regular fa-envelope icon"></i>
+            <input type="email" name="email" placeholder="sarah@example.com" required>
+        </div>
+    </div>
 
-            <div class="input-group">
-                <label>Password</label>
-                <div class="input-wrap">
-                    <i class="fa-solid fa-lock icon"></i>
-                    <input type="password" id="login-pw" placeholder="Enter your password">
-                    <i class="fa-regular fa-eye toggle-pw" onclick="togglePw('login-pw', this)"></i>
-                </div>
-            </div>
+    <div class="input-group">
+        <label>Password</label>
+        <div class="input-wrap">
+            <i class="fa-solid fa-lock icon"></i>
+            <input type="password" name="password" id="login-pw" placeholder="Enter your password" required>
+            <i class="fa-regular fa-eye toggle-pw" onclick="togglePw('login-pw', this)"></i>
+        </div>
+    </div>
 
-            <a href="#" class="forgot-link">Forgot your password?</a>
+    <a href="#" class="forgot-link">Forgot your password?</a>
 
-            <!-- Update week on same day as login (from your notes) -->
-            <div class="update-week-box">
-                <div class="uw-header">
-                    <i class="fa-solid fa-rotate"></i>
-                    <span>Update Pregnancy Week</span>
-                    <small>updates on login</small>
-                </div>
-                <div class="input-wrap">
-                    <i class="fa-solid fa-calendar-heart icon"></i>
-                    <select>
-                        <option value="">Keep current week (Week 18)…</option>
-                        <optgroup label="First Trimester (Weeks 1–12)">
-                            <option>Week 1</option><option>Week 2</option><option>Week 3</option>
-                            <option>Week 4</option><option>Week 5</option><option>Week 6</option>
-                            <option>Week 7</option><option>Week 8</option><option>Week 9</option>
-                            <option>Week 10</option><option>Week 11</option><option>Week 12</option>
-                        </optgroup>
-                        <optgroup label="Second Trimester (Weeks 13–26)">
-                            <option>Week 13</option><option>Week 14</option><option>Week 15</option>
-                            <option>Week 16</option><option>Week 17</option><option>Week 18</option>
-                            <option>Week 19</option><option>Week 20</option><option>Week 21</option>
-                            <option>Week 22</option><option>Week 23</option><option>Week 24</option>
-                            <option>Week 25</option><option>Week 26</option>
-                        </optgroup>
-                        <optgroup label="Third Trimester (Weeks 27–40)">
-                            <option>Week 27</option><option>Week 28</option><option>Week 29</option>
-                            <option>Week 30</option><option>Week 31</option><option>Week 32</option>
-                            <option>Week 33</option><option>Week 34</option><option>Week 35</option>
-                            <option>Week 36</option><option>Week 37</option><option>Week 38</option>
-                            <option>Week 39</option><option>Week 40</option>
-                        </optgroup>
-                    </select>
-                </div>
-                <p class="hint"><i class="fa-solid fa-circle-info"></i> Your dashboard & weekly tips will refresh automatically</p>
-            </div>
+    <div class="update-week-box">
+        <div class="uw-header">
+            <i class="fa-solid fa-rotate"></i>
+            <span>Update Pregnancy Week</span>
+            <small>updates on login</small>
+        </div>
+        <div class="input-wrap">
+            <i class="fa-solid fa-calendar-heart icon"></i>
+            <select name="pregnancy-week">
+                <option value="">Keep current week (Week 18)…</option>
+                <optgroup label="First Trimester (Weeks 1–12)">
+                    <option>Week 1</option><option>Week 2</option><option>Week 3</option>
+                    <option>Week 4</option><option>Week 5</option><option>Week 6</option>
+                    <option>Week 7</option><option>Week 8</option><option>Week 9</option>
+                    <option>Week 10</option><option>Week 11</option><option>Week 12</option>
+                </optgroup>
+                <optgroup label="Second Trimester (Weeks 13–26)">
+                    <option>Week 13</option><option>Week 14</option><option>Week 15</option>
+                    <option>Week 16</option><option>Week 17</option><option>Week 18</option>
+                    <option>Week 19</option><option>Week 20</option><option>Week 21</option>
+                    <option>Week 22</option><option>Week 23</option><option>Week 24</option>
+                    <option>Week 25</option><option>Week 26</option>
+                </optgroup>
+                <optgroup label="Third Trimester (Weeks 27–40)">
+                    <option>Week 27</option><option>Week 28</option><option>Week 29</option>
+                    <option>Week 30</option><option>Week 31</option><option>Week 32</option>
+                    <option>Week 33</option><option>Week 34</option><option>Week 35</option>
+                    <option>Week 36</option><option>Week 37</option><option>Week 38</option>
+                    <option>Week 39</option><option>Week 40</option>
+                </optgroup>
+            </select>
+        </div>
+        <p class="hint"><i class="fa-solid fa-circle-info"></i> Your dashboard & weekly tips will refresh automatically</p>
+    </div>
 
-            <button class="btn-submit">
-                <i class="fa-solid fa-arrow-right-to-bracket"></i>&nbsp; Sign In
-            </button>
+    <button class="btn-submit" type="submit">
+        <i class="fa-solid fa-arrow-right-to-bracket"></i>&nbsp; Sign In
+    </button>
 
-            <div class="divider">or continue with</div>
-            <div class="social-btns">
-                <button class="btn-social">
-                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google"> Google
-                </button>
-                <button class="btn-social">
-                    <i class="fa-brands fa-facebook" style="color:#1877f2;font-size:17px;"></i> Facebook
-                </button>
-            </div>
+    <div class="divider">or continue with</div>
+    <div class="social-btns">
+        <button class="btn-social" type="button">
+            <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google"> Google
+        </button>
+        <button class="btn-social" type="button">
+            <i class="fa-brands fa-facebook" style="color:#1877f2;font-size:17px;"></i> Facebook
+        </button>
+    </div>
 
-        </form>
+</form>
 
         <!-- ======= SIGNUP ======= -->
         <form action="./api/signup.php" method="post" class="form-panel" id="signup-form">

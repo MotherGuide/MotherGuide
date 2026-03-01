@@ -1,6 +1,6 @@
 <?php
-require_once("./php/Database.php");
-require_once("./php/User.php");
+require_once("../php/Database.php");
+require_once("../php/User.php");
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     echo json_encode(["status" => "error", "message" => "Invalid request"]);

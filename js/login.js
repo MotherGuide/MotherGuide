@@ -7,7 +7,7 @@ fetch("login.php", {
 
     if (data.status === "success") {
         alert(data.message);
-        window.location.href = "../index.html";
+        window.location.href = "../index.php";
     } else {
         alert(data.message);
     }

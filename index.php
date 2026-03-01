@@ -13,7 +13,7 @@ $loggedIn = isset($_SESSION["user_id"]);
 <body>
     <header id="navbar">
         <div class="nav-left">
-            <a class="logo" href="./index.html">
+            <a class="logo" href="./index.php">
                 <img src="images/logo.png">
                 MotherGuide
             </a>
