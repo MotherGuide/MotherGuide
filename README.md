@@ -53,11 +53,7 @@ A basic PHP web project with user **signup**, **login**, **logout**, and secure 
      ```
 
 3. **Configure the database connection**
-   - Copy the example config file:
-     ```bash
-     cp config/db.example.php config/db.php
-     ```
-   - Edit `config/db.php` with your credentials:
+   - Edit `..php/Database.php` with your credentials:
      ```php
      define('DB_HOST', 'localhost');
      define('DB_USER', 'your_username');
@@ -78,26 +74,41 @@ A basic PHP web project with user **signup**, **login**, **logout**, and secure 
 
 ## Project Structure
 
-```
-motherguide/
-├── config/
-│   └── db.php              # Database connection settings
+```MotherGUIDE/
+│
+├── api/
+│   ├── login.php
+│   └── signup.php
+│
+├── css/
+│   └── style.css
+│
 ├── database/
-│   └── schema.sql          # SQL table definitions
-├── pages/
-│   ├── login.php           # Login page
-│   ├── signup.php          # Registration page
-│   └── dashboard.php       # Protected page (requires login)
-├── includes/
-│   ├── auth.php            # Authentication helpers
-│   ├── header.php          # Shared header
-│   └── footer.php          # Shared footer
-├── assets/
-│   ├── css/
-│   │   └── style.css       # Custom styles
-│   └── js/
-│       └── main.js         # Front-end scripts
-└── index.php               # Entry point / redirect
+│   ├── DB_Creation.txt
+│   └── DB_Tip_Sample_InsertionData.txt
+│
+├── icons/
+│   └── (SVG icon files)
+│
+├── images/
+│   └── (Application images)
+│
+├── js/
+│   ├── login.js
+│   └── script.js
+│
+├── php/
+│   ├── Comment.php
+│   ├── Database.php
+│   ├── Tip.php
+│   └── User.php
+│
+├── auth.html
+├── auth_admin_login.html
+├── index.php
+├── tips.html
+├── README.md
+└── MotherGUIDE.md
 ```
 
 ---
