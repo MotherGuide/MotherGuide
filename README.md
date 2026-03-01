@@ -45,7 +45,7 @@ A basic PHP web project with user **signup**, **login**, **logout**, and secure 
    - Open your MySQL client (phpMyAdmin, MySQL Workbench, or CLI)
    - Create a new database:
      ```sql
-     CREATE DATABASE motherguide;
+     CREATE DATABASE motherguidedb;
      ```
    - Import the provided SQL schema from the DB_Creation.txt file.
 
