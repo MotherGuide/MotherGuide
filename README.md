@@ -104,8 +104,7 @@ A basic PHP web project with user **signup**, **login**, **logout**, and secure 
 ├── auth_admin_login.html
 ├── index.php
 ├── tips.html
-├── README.md
-└── MotherGUIDE.md
+└── REABME.md
 ```
 
 ---
