@@ -55,7 +55,7 @@ A basic PHP web project with user **signup**, **login**, **logout**, and secure 
      define('DB_HOST', 'localhost');
      define('DB_USER', 'your_username');
      define('DB_PASS', 'your_password');
-     define('DB_NAME', 'motherguide');
+     define('DB_NAME', 'motherguidedb');
      ```
 
 4. **Start your web server**
