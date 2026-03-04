@@ -6,7 +6,8 @@ A basic PHP web project with user **signup**, **login**, **logout**, and secure 
 
 ## Features
 
-- User registration and login system
+- User (mothers) registration and login system
+- Admin (doctors/staff) registration and login system (separate database table)
 - Password handling (hashed for security — uses `password_hash()`)
 - Form validation and error messages
 - Protected routes/pages (redirect if not logged in)
@@ -45,7 +46,7 @@ A basic PHP web project with user **signup**, **login**, **logout**, and secure 
    - Open your MySQL client (phpMyAdmin, MySQL Workbench, or CLI)
    - Create a new database:
      ```sql
-     CREATE DATABASE motherguidedb;
+     CREATE DATABASE motherguide;
      ```
    - Import the provided SQL schema from the DB_Creation.txt file.
 
@@ -75,7 +76,9 @@ A basic PHP web project with user **signup**, **login**, **logout**, and secure 
 │
 ├── api/
 │   ├── login.php
-│   └── signup.php
+│   ├── signup.php
+│   ├── admin_login.php
+│   └── admin_signup.php
 │
 ├── css/
 │   └── style.css
@@ -97,24 +100,34 @@ A basic PHP web project with user **signup**, **login**, **logout**, and secure 
 ├── php/
 │   ├── Comment.php
 │   ├── Database.php
+│   ├── Admin.php
 │   ├── Tip.php
 │   └── User.php
 │
 ├── auth.html
 ├── auth_admin_login.html
 ├── index.php
-├── tips.html
-└── README.md
+├── tips.php
+├── README.md
+└── MotherGUIDE.md
 ```
 
 ---
 
 ## Authentication Flow
 
-1. **Signup** — User submits registration form → password hashed with `password_hash()` → stored in DB
-2. **Login** — Credentials verified with `password_verify()` → session started on success
-3. **Protected Pages** — Session checked on every protected page → redirect to login if not authenticated
-4. **Logout** — Session destroyed → redirect to login page
+### Mothers (Users)
+- **Signup**: Submit form at `auth.html` → `api/signup.php` → password hashed → stored in `users` table
+- **Login**: Credentials verified → `$_SESSION['user_id']`, `user_name`, etc. set → dashboard access
+
+### Doctors/Admins
+- **Signup**: Submit form at `auth_admin_login.html` → `api/admin_signup.php` → password hashed → stored in `admins` table
+- **Login**: Credentials verified → `$_SESSION['admin_id']`, `admin_name`, etc. set → admin panel access
+
+### Protected Pages
+- Check `$_SESSION['user_id']` for mother-only pages
+- Check `$_SESSION['admin_id']` for staff/admin-only pages
+- Redirect to appropriate login page if session missing
 
 ---
 

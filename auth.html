@@ -552,6 +552,56 @@
             navbar.classList.remove('scrolled');
         }
     });
+
+    /* ── Form submission handling ── */
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const formData = new FormData(form);
+        try {
+            const response = await fetch('./api/login.php', {
+                method: 'POST',
+                body: formData
+            });
+            const result = await response.json();
+            if (result.status === 'success') {
+                window.location.href = './index.php';
+            } else {
+                alert(result.message);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Login failed. Please try again.');
+        }
+    });
+
+    document.getElementById('signup-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const formData = new FormData(form);
+        try {
+            const response = await fetch('./api/signup.php', {
+                method: 'POST',
+                body: formData
+            });
+            const result = await response.json();
+            if (result.status === 'success') {
+                // Optionally pre-fill login email and switch to login tab
+                const signupEmail = formData.get('email') || '';
+                const loginEmailInput = document.querySelector('#login-form input[name="email"]');
+                if (loginEmailInput) loginEmailInput.value = signupEmail;
+                alert(result.message || 'Registration successful — please sign in.');
+                switchTab('login');
+                const loginPw = document.querySelector('#login-form input[name="password"]');
+                if (loginPw) loginPw.focus();
+            } else {
+                alert(result.message);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Signup failed. Please try again.');
+        }
+    });
 </script>
 
 </body>

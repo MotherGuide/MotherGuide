@@ -244,6 +244,24 @@ main{
     color: #ffffff;
 }
 
+/* Mobile: align welcome box left */
+@media (max-width: 768px) {
+    .welcome-box {
+        margin-left: 16px;
+        margin-right: auto;
+        width: auto; /* let box size to content */
+        max-width: none;
+        text-align: left;
+    }
+    .dashboard-container {
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start; /* ensure children start at left */
+        gap: 12px;
+    }
+}
+
 .comment-section{
     display: flex;
     flex-direction: row;

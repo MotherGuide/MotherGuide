@@ -341,10 +341,73 @@
 
 <!-- CENTERED FORM -->
 <main>
-    <div class="auth-card" style="display: flex; flex-direction: column; justify-content: center; width: auto;">
-        <img src="images/logo.png" style="width: 300px; ">
-        <h2 >Admin Login Coming Soon</h2>
-        
+    <div class="auth-card">
+        <!-- HEADER -->
+        <div class="card-header">
+            <div class="icon-wrap">
+                <i class="fa-solid fa-user-shield"></i>
+            </div>
+            <h2>Staff Portal</h2>
+            <p>Doctors and administrators</p>
+        </div>
+
+        <!-- TABS -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('login')">Sign In</button>
+            <button class="tab-btn" onclick="switchTab('signup')">Create Account</button>
+        </div>
+
+        <!-- LOGIN PANEL -->
+        <form action="./api/admin_login.php" method="post" class="form-panel active" id="login-form">
+            <div class="input-group">
+                <label>Email Address</label>
+                <div class="input-wrap">
+                    <i class="fa-regular fa-envelope icon"></i>
+                    <input type="email" name="email" placeholder="doc@example.com" required>
+                </div>
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <div class="input-wrap">
+                    <i class="fa-solid fa-lock icon"></i>
+                    <input type="password" name="password" id="login-pw" placeholder="Enter your password" required>
+                    <i class="fa-regular fa-eye toggle-pw" onclick="togglePw('login-pw', this)"></i>
+                </div>
+            </div>
+            <button class="btn-submit" type="submit">
+                <i class="fa-solid fa-arrow-right-to-bracket"></i>&nbsp; Sign In
+            </button>
+        </form>
+
+        <!-- SIGNUP PANEL -->
+        <form action="./api/admin_signup.php" method="post" class="form-panel" id="signup-form">
+            <div class="input-group">
+                <label>Full Name</label>
+                <div class="input-wrap">
+                    <i class="fa-regular fa-user icon"></i>
+                    <input name="full-name" type="text" placeholder="Dr. Sarah Namuli" required>
+                </div>
+            </div>
+            <div class="input-group">
+                <label>Email Address</label>
+                <div class="input-wrap">
+                    <i class="fa-regular fa-envelope icon"></i>
+                    <input name="email" type="email" placeholder="doc@example.com" required>
+                </div>
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <div class="input-wrap">
+                    <i class="fa-solid fa-lock icon"></i>
+                    <input name="password" type="password" id="signup-pw" placeholder="Create a strong password" required>
+                    <i class="fa-regular fa-eye toggle-pw" onclick="togglePw('signup-pw', this)"></i>
+                </div>
+            </div>
+            <button class="btn-submit" type="submit">
+                <i class="fa-solid fa-user-plus"></i>&nbsp; Add Staff Account
+            </button>
+        </form>
+    </div>
 </main>
 
 <script>
@@ -381,6 +444,48 @@
             navbar.classList.add('scrolled');
         } else {
             navbar.classList.remove('scrolled');
+        }
+    });
+
+    /* ── Form submission handling ── */
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        try {
+            const response = await fetch('./api/admin_login.php', {
+                method: 'POST',
+                body: formData
+            });
+            const result = await response.json();
+            if (result.status === 'success') {
+                window.location.href = './admin_dashboard.php';
+            } else {
+                alert(result.message);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Login failed. Please try again.');
+        }
+    });
+
+    document.getElementById('signup-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        try {
+            const response = await fetch('./api/admin_signup.php', {
+                method: 'POST',
+                body: formData
+            });
+            const result = await response.json();
+            if (result.status === 'success') {
+                alert(result.message);
+                switchTab('login');
+            } else {
+                alert(result.message);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Signup failed. Please try again.');
         }
     });
 </script>
