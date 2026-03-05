@@ -1,4 +1,3 @@
-@ -1,32 +0,0 @@
 # MEASUREMENT THEORY
 ---
 
