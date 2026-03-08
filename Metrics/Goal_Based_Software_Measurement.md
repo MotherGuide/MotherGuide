@@ -6,13 +6,26 @@
 ## 1. Goal
 To Ensure that pregnant mothers that need abrupt but essential help receive it in time.
 
-## Question
-1. How many mothers require abrupt but essential help?
-2. How many mothers that request for abrupt but essential help receive per hour?
+## Questions
+1. How quickly are emergencies identified?
+2. What percentage of emergency cases receive timely intervention?
+3. Are mothers aware of the emergency contact process?
 
-## Metric(What is to be measured)
-1. How many mothers click the "report emergency" button per hour? -> 5 mothers 
-2. How many mothers of those that click the "report emergency" button per hour receive the help within the safe possible time? -> 3 mothers
+## Metrics (What is to be measured)
+1. Average response time from emergency request to assistance.
+2. Percentage of emergencies resolved within recommended timeframe.
+3. Number of mothers trained/aware of emergency protocols.
+4. Ratio of successful vs. delayed emergency interventions.
 
 ---
 ## 2. Goal
+To provide tips to pregnant others according to their gestation age
+
+## Questions
+1. Are mothers receiving tips that match their specific gestation stage?
+2. Do mothers find the tips relevant and actionable?
+
+## Metrics (What is to be measured)
+1. Percentage of mothers who receive stage-appropriate tips.
+2. Satisfaction rating from mothers (likes, dislikes and comments).
+3. Number of tips accessed/read per mother.
