@@ -96,5 +96,3 @@ We compared how the different parts of the module use these concepts:
 | **Logic Complexity** | High (Trimester calculations) | Moderate (Data validation) |
 | **Reuse** | Reuses `Tip.php` | Reuses `Tip.php` |
 
-**Conclusion for the Group:**
-The **Tips Display** is our biggest "Output," focusing on how the mother sees the data. The **Admin Add** is our primary "Input," focusing on data entry. Both files are efficient because they share the same `Tip.php` file for database tasks.
