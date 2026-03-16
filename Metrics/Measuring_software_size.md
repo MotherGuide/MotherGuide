@@ -1,6 +1,6 @@
 # MotherGuide: Software Size Analysis 
 
-## (User Authentication mudule)
+## (User Authentication module)
 
 
 The software size and complexity of the User Authentication module, applying formal measurement concepts to our specific project files.
