@@ -1,0 +1,45 @@
+Software Relibiity Models and Metrics
+Reliability refers to the probability that a system functions without failure for a specific time in a specified environment.
+Reliability  Engineering goal is to ensure that the developing software reaches the market with minimum development time, minimum development cos and maximum reliability.
+
+In our MotherGuide, reliability is criical because incorrect and unreliable information may negatively impact marternal health decisios of the mother.
+Failure refers to any departure of system behavior in execution from users needs of expectations. this makes it unreliable.
+In MotherGuide, failure may be caused by;
+1. Incorrect calculation of pregnacy weeks
+2. Application crushing during use 
+3. Inability of the system to send tips as expected by the mother.
+
+Failure intesity refers to the number of failures occurring within a specific time period
+This helps track the nuber of errors per day or week or month and the most affected modules for example the login, chat 
+
+
+Mean Time To Failure.
+This measures the average time the system operates before encountering a failure. 
+for example if the system runs for 10 hours before failure or 8 hours before failure.
+Then; MTTF = (10+8)/2 = 9 hours
+A higher MTTF indicates better system reliability.
+
+Reliabilty Growth
+As bugs are indintified and fixed during testing, the reliability of the system improves or grows overtime
+In MotherGuide , If continous testing is performed on modules such as;
+pregnancy tracker, chat functionality, giving tips of a wrong week pregnancy, errors are fixed to reduce the future failures and reliability therefore grows
+Reliability growth models include Basic Exponential model which assumes finite failures in infinite time, Logarithmic Poisson Model whicj=h assumes infinite failures
+
+
+
+System Availability
+This measures how often the system is operational and accessible
+Availability =  MTTF/ (MTTF + MTTR)
+where MTTF is Mean Time To Failure
+      MTTR is Mean Time To RepairE
+
+
+Reliability Testing Process
+Define reliability objectives for example giving accurate tips, mnimize system crashes
+Develop Operational profile for example user actions like login, tips, sending messages
+Prepare test cases that is simulate real user interlactions
+Execute tests that is run system under different scenarios
+Analyze Failure data for example use logs to identify and fix issues
+
+
+The goal of applying software reliability models and metrics, the MotherGuide Sytem ensures high quality performance, reduced errors and dependable systems which increases user trust.
