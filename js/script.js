@@ -10,3 +10,24 @@ window.addEventListener("scroll", function() {
         // navleft1.classList.add('hidden');
     }
 });
+// Handle Like/Dislike[cite: 11]
+function handleInteraction(tipId, type) {
+    const formData = new FormData();
+    formData.append('tip_id', tipId);
+    formData.append('type', type);
+
+    fetch("api/interact.php", {
+        method: "POST",
+        body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.status === "success") {
+            location.reload(); // Refresh to see updated counts
+        }
+    });
+}
+
+// Example: Attach to your stat divs[cite: 16, 17]
+document.querySelector('.stat.likes').onclick = () => handleInteraction(currentTipId, 'like');
+document.querySelector('.stat.dislikes').onclick = () => handleInteraction(currentTipId, 'dislike');

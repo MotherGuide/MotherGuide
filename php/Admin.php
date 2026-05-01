@@ -89,4 +89,43 @@ class Admin {
 
         return ["status" => "error", "message" => "Invalid email or password"];
     }
+    // Add these inside your Admin class in php/Admin.php[cite: 20]
+
+/**
+ * Generates a unique 5-char ID for the tips table (e.g., T0001)
+ */
+public function generateTipId() {
+    $query = "SELECT id FROM tips ORDER BY id DESC LIMIT 1";
+    $result = $this->conn->query($query);
+
+    if ($result && $result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $lastId = $row['id'];
+        // Extract number from "T0001", increment, and pad[cite: 20]
+        $number = intval(substr($lastId, 1)) + 1;
+        return "T" . str_pad($number, 4, "0", STR_PAD_LEFT);
+    }
+    return "T0001";
+}
+
+/**
+ * Saves a new tip to the database
+ */
+public function addTip($title, $content, $week) {
+    $id = $this->generateTipId();
+    
+    // Matches your schema: id, title, content, week, and default 0s for counts[cite: 18]
+    $query = "INSERT INTO tips (id, title, content, pregnancy_week, like_count, dislike_count, comment_count, views) 
+              VALUES (?, ?, ?, ?, 0, 0, 0, 0)";
+    
+    $stmt = $this->conn->prepare($query);
+    // Binding: 3 strings (s) and 1 integer (i)[cite: 20]
+    $stmt->bind_param("sssi", $id, $title, $content, $week);
+    
+    if ($stmt->execute()) {
+        return ["status" => "success", "id" => $id];
+    } else {
+        return ["status" => "error", "message" => $stmt->error];
+    }
+}
 }

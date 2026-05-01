@@ -1,6 +1,18 @@
-CREATE DATABASE IF NOT EXISTS MotherGuideDB;
-USE MotherGuideDB;
+-- Create the Database
+CREATE DATABASE IF NOT EXISTS motherguidedb;
+USE motherguidedb;
 
+-- Admins Table
+CREATE TABLE admins (
+    id VARCHAR(5) PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    sign_up_day ENUM('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday') NOT NULL,
+    sign_up_date DATE NOT NULL
+);
+
+-- Users Table
 CREATE TABLE users (
     id VARCHAR(5) PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -11,14 +23,7 @@ CREATE TABLE users (
     pregnancy_week INT DEFAULT 0
 );
 
-CREATE TABLE admins (
-    id          VARCHAR(5) PRIMARY KEY,
-    name        VARCHAR(100) NOT NULL,
-    email       VARCHAR(150) NOT NULL UNIQUE,
-    password    VARCHAR(255) NOT NULL,
-    registered_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
+-- Tips Table
 CREATE TABLE tips (
     id VARCHAR(5) PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
@@ -27,19 +32,26 @@ CREATE TABLE tips (
     dislike_count INT DEFAULT 0,
     comment_count INT DEFAULT 0,
     pregnancy_week INT NOT NULL,
-    views INT DEFAULT 0,
-    posted_by VARCHAR(5) NOT NULL,
-
-    FOREIGN KEY (posted_by) REFERENCES admins(id) ON DELETE CASCADE
-
+    views INT DEFAULT 0
 );
 
+-- Comments Table (Linked to Users and Tips)
 CREATE TABLE comments (
     id VARCHAR(5) PRIMARY KEY,
     comment_content TEXT NOT NULL,
     user_id VARCHAR(5) NOT NULL,
     tip_id VARCHAR(5) NOT NULL,
+    CONSTRAINT fk_comment_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    CONSTRAINT fk_comment_tip FOREIGN KEY (tip_id) REFERENCES tips(id) ON DELETE CASCADE
+);
 
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    FOREIGN KEY (tip_id) REFERENCES tips(id) ON DELETE CASCADE
+-- Likes Table (Linked to Users and Tips)
+CREATE TABLE likes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id VARCHAR(5) NOT NULL,
+    tip_id VARCHAR(5) NOT NULL,
+    type ENUM('like', 'dislike') NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_like_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    CONSTRAINT fk_like_tip FOREIGN KEY (tip_id) REFERENCES tips(id) ON DELETE CASCADE
 );
