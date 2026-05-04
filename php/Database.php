@@ -6,7 +6,7 @@ class Database {
     // NOTE: In production, these should be loaded from environment variables or secure configuration files
     private $host = "localhost";
     private $username = "root";
-    private $password = "mark24";
+    private $password = "";
     private $dbname = "motherguidedb";
 
     public $conn;

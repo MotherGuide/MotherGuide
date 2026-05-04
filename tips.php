@@ -31,10 +31,27 @@ if ($res) {
             $tipsByWeek[$w] = [];
         }
         $tipsByWeek[$w][] = [
+            'id' => $row['id'],
             'title' => $row['title'],
-            'body'  => $row['content']
+            'body'  => $row['content'],
+            'like_count' => $row['like_count'],
+            'dislike_count' => $row['dislike_count'],
+            'comment_count' => $row['comment_count'],
+            'views' => $row['views']
         ];
     }
+}
+
+// Increment view count for the current week's tip
+if (isset($tipsByWeek[$pregnancyWeek][0]['id'])) {
+    $tipId = $tipsByWeek[$pregnancyWeek][0]['id'];
+    $stmt = $conn->prepare("UPDATE tips SET views = views + 1 WHERE id = ?");
+    $stmt->bind_param("s", $tipId);
+    $stmt->execute();
+    $stmt->close();
+    
+    // Update the view count in the array
+    $tipsByWeek[$pregnancyWeek][0]['views']++;
 }
 ?>
 <!DOCTYPE html>
@@ -294,10 +311,10 @@ if ($res) {
                     <div class="badge-row" id="tip-badges"></div>
                     <div id="tip-list"></div>
                     <div class="stats">
-                        <div class="stat"><img src="./icons/thumbs-up-regular-full.svg" alt=""><span class="likes-count">—</span></div>
-                        <div class="stat"><img src="./icons/thumbs-down-regular-full.svg" alt=""><span class="dislikes-count">—</span></div>
-                        <div class="stat"><img src="./icons/comment-dots-solid-full.svg" alt=""><span class="comments-count">—</span></div>
-                        <div class="stat"><img src="./icons/eye-solid-full.svg" alt=""><span class="views-count">—</span></div>
+                        <div class="stat likes" onclick="handleInteraction('<?php echo $tipsByWeek[$pregnancyWeek][0]['id'] ?? ''; ?>', 'like')"><img src="./icons/thumbs-up-regular-full.svg" alt=""><span class="likes-count"><?php echo $tipsByWeek[$pregnancyWeek][0]['like_count'] ?? 0; ?></span></div>
+                        <div class="stat dislikes" onclick="handleInteraction('<?php echo $tipsByWeek[$pregnancyWeek][0]['id'] ?? ''; ?>', 'dislike')"><img src="./icons/thumbs-down-regular-full.svg" alt=""><span class="dislikes-count"><?php echo $tipsByWeek[$pregnancyWeek][0]['dislike_count'] ?? 0; ?></span></div>
+                        <div class="stat"><img src="./icons/comment-dots-solid-full.svg" alt=""><span class="comments-count"><?php echo $tipsByWeek[$pregnancyWeek][0]['comment_count'] ?? 0; ?></span></div>
+                        <div class="stat"><img src="./icons/eye-solid-full.svg" alt=""><span class="views-count"><?php echo $tipsByWeek[$pregnancyWeek][0]['views'] ?? 0; ?></span></div>
                     </div>
                 </div>
             </div>
@@ -325,13 +342,13 @@ const USER_WEEK = <?php echo $pregnancyWeek; ?>;
 
 // Render only the user's own week — no navigation allowed
 (function(){
-    const tip = tips[USER_WEEK] || { title: 'Tip coming soon', body: '<p>Your weekly tip is being updated. Please check back later.</p>' };
+    const tip = tips[USER_WEEK] || [{ title: 'Tip coming soon', body: '<p>Your weekly tip is being updated. Please check back later.</p>' }];
     const t   = triNum(USER_WEEK);
         document.getElementById('tip-badges').innerHTML =
             `<span class="week-badge"><i class="fa-solid fa-baby"></i>&nbsp;Week ${USER_WEEK}</span>` +
             `<span class="tri-badge tri-badge-${t}">${triLabel(USER_WEEK)}</span>`;
         // render all tips for the week
-        const tipList = Array.isArray(tip) ? tip : (tip ? [tip] : []);
+        const tipList = Array.isArray(tip) ? tip : [tip];
         document.getElementById('tip-list').innerHTML = tipList.map(ti => `
             <div class="single-tip">
                 <h3 class="tip-title">${ti.title}</h3>
@@ -343,6 +360,43 @@ const USER_WEEK = <?php echo $pregnancyWeek; ?>;
 function toggleMenu() {
     document.getElementById('hamburger').classList.toggle('open');
     document.getElementById('mobile-menu').classList.toggle('open');
+}
+
+function handleInteraction(tipId, type) {
+    const formData = new FormData();
+    formData.append('tip_id', tipId);
+    formData.append('type', type);
+
+    fetch("api/interact.php", {
+        method: "POST",
+        body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.status === "success") {
+            // Update the statistics without full page reload
+            updateTipStats(tipId);
+        } else {
+            console.error('Interaction failed:', data.message);
+        }
+    })
+    .catch(err => {
+        console.error('Network error:', err);
+    });
+}
+
+function updateTipStats(tipId) {
+    // Fetch updated tip data and update the display
+    fetch(`api/get_tip_stats.php?tip_id=${tipId}`)
+    .then(res => res.json())
+    .then(data => {
+        if (data.status === "success") {
+            document.querySelector('.likes-count').textContent = data.likes;
+            document.querySelector('.dislikes-count').textContent = data.dislikes;
+            document.querySelector('.comments-count').textContent = data.comments;
+        }
+    })
+    .catch(err => console.error('Failed to update stats:', err));
 }
 </script>
 </body>

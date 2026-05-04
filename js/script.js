@@ -29,5 +29,5 @@ function handleInteraction(tipId, type) {
 }
 
 // Example: Attach to your stat divs[cite: 16, 17]
-document.querySelector('.stat.likes').onclick = () => handleInteraction(currentTipId, 'like');
-document.querySelector('.stat.dislikes').onclick = () => handleInteraction(currentTipId, 'dislike');
+// Note: These need to be attached to actual elements in the HTML
+// This is a template - you'll need to add proper IDs or classes to your HTML elements

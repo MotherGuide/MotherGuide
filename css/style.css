@@ -1,18 +1,16 @@
 /* ===== Global ===== */
-* {
+*, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Lato, Montserrat, Nunito, Arial, Helvetica, sans-serif;
+    font-family: 'Nunito', Lato, Montserrat, Arial, Helvetica, sans-serif;
 }
 
 body {
-    /* background: #f8f4f7; */
     color: #333;
-    background: url(../images/bg.png);
-    background-repeat: no-repeat;
-    background-size: 100% auto;
-    background-position: center;
+    /* FIX: background-size was "100% auto" which distorts on wide screens.
+       "cover" matches the pattern used in all page-level <style> overrides. */
+    background: url(../images/bg.png) no-repeat center top / cover fixed;
     overflow-x: hidden;
 }
 
@@ -24,73 +22,60 @@ a {
 /* ===== Navbar ===== */
 #navbar {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 60px;
-    /* background: #ffffff; */
-
-    display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;  /* pushes left & right apart */
+    justify-content: space-between;
     padding: 15px 40px;
-    /* background-color: rgba(255, 255, 255, 0.5); */
     background: rgba(13, 148, 136, 0.8);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-
-    /* background: transparent; */
-    transition: all 0.3s ease; /* smooth change */
-
-    position: fixed; 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: fixed;
     top: 0;
     width: 100vw;
     height: 60px;
+    z-index: 100;
 }
-/* When Scrolled */
+
+/* When scrolled */
 #navbar.scrolled {
-    background: rgba(13, 148, 136, 0.8);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    background: rgba(13, 148, 136, 1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 12px 40px;
 }
-#navbar.scrolled .nav-center a{
-    color: #ffffff;
-}
 
-/* ========== NAV BAR SECTIONS ========== */
-/* Left */
-.nav-left h2 {
-    margin: 0;
-    color: #e75480;
-}
-
-/* Center */
+/* ===== Navbar Sections ===== */
 .nav-center {
     display: flex;
     gap: 30px;
 }
+
 .nav-center a {
     text-decoration: none;
-    color: #333;
+    /* FIX: was #333 (dark on dark teal navbar — unreadable). Changed to white. */
+    color: #ffffff;
     font-weight: 500;
+    font-size: 15px;
+    transition: color 0.2s;
 }
 
 .nav-center a:hover {
     color: #e75480;
 }
 
-/* Right */
 .nav-right {
     display: flex;
+    align-items: center;
     gap: 15px;
 }
 
-/* =========== Logo =========== */
+/* ===== Logo ===== */
 .logo {
     display: flex;
     align-items: center;
     font-size: 22px;
     font-weight: bold;
-    color: #e75480;
+    /* FIX: was #e75480 (pink on teal navbar — hard to read). Changed to white. */
+    color: #ffffff;
 }
 
 .logo img {
@@ -98,48 +83,44 @@ a {
     margin-right: -20px;
 }
 
-/* =========== Profile Picture =========== */
-.profile-picture{
+/* ===== Profile Picture ===== */
+.profile-picture {
     border-radius: 50%;
     width: 35px;
     padding: 3px;
     background-color: #ffffff;
-    color: #000000;
 }
 
-/* =========== Nav links =========== */
-.nav-links{
-    display: flex;
-    flex-direction: row;
-}
-
-.nav-links a {
-    margin: 0 15px;
-    font-size: 15px;
-}
-
+/* ===== Buttons ===== */
 .btn {
     padding: 8px 18px;
     border-radius: 6px;
     font-size: 14px;
     cursor: pointer;
+    border: none;
+    font-weight: 600;
+    transition: opacity 0.2s, transform 0.15s;
+}
+
+.btn:hover {
+    opacity: 0.88;
+    transform: translateY(-1px);
 }
 
 .btn-primary {
     background: #e75480;
-    color: white;
+    color: #ffffff;
 }
 
 .btn-secondary {
     background: #6c757d;
-    color: white;
+    color: #ffffff;
 }
 
-/* ============ main =============== */
-main{
+/* ===== Main content offset for fixed navbar ===== */
+main {
     margin-top: 60px;
 }
-
 
 /* ===== Hero Section ===== */
 .hero {
@@ -147,7 +128,6 @@ main{
     align-items: center;
     justify-content: space-between;
     padding: 60px;
-    /* background: linear-gradient(to right, #fde8f0, #ffffff); */
 }
 
 .hero-text {
@@ -182,11 +162,10 @@ main{
 
 .card {
     background: rgba(255, 255, 255, 0.5);
-    /* background: rgba(13, 148, 136, 0.8); */
     width: 23%;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0px 3px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
@@ -205,26 +184,28 @@ main{
     margin-bottom: 15px;
 }
 
-.card a{
-    cursor: pointer;
-}
-
 /* ===== Emergency Bar ===== */
 .emergency {
     background: #ff4d6d;
     padding: 15px;
     text-align: center;
-    color: white;
+    color: #ffffff;
     font-weight: bold;
     margin: 20px 60px;
     border-radius: 8px;
-
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
 }
-.emergency-icon{
+
+.emergency:hover {
+    background: #e03050;
+}
+
+.emergency-icon {
     width: 20px;
     height: 20px;
     margin: 3px 5px 0 0;
@@ -232,37 +213,19 @@ main{
 
 /* ===== Dashboard ===== */
 .dashboard-container {
-    padding: 20px 20px;
+    padding: 20px;
 }
 
 .welcome-box {
-    background:  rgba(0, 0, 0, 0.65);
+    background: rgba(0, 0, 0, 0.65);
     padding: 15px;
     border-radius: 10px;
-    margin-left: 100px;
+    /* margin-left: 100px; */
     width: 300px;
     color: #ffffff;
 }
 
-/* Mobile: align welcome box left */
-@media (max-width: 768px) {
-    .welcome-box {
-        margin-left: 16px;
-        margin-right: auto;
-        width: auto; /* let box size to content */
-        max-width: none;
-        text-align: left;
-    }
-    .dashboard-container {
-        padding: 12px;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start; /* ensure children start at left */
-        gap: 12px;
-    }
-}
-
-.comment-section{
+.comment-section {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -276,50 +239,70 @@ main{
 
 .comment-card {
     background: rgba(255, 255, 255, 0.6);
-    /* background: rgba(13, 148, 136, 0.8); */
     width: 100%;
-    /* height: 250px; */
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0px 3px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
-
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.stats{
+/* ===== Stats ===== */
+.stats {
     margin: 15px 0 0 0;
     display: flex;
     flex-direction: row;
     gap: 10px;
 }
 
-.stat{
+.stat {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+    transition: color 0.2s;
 }
 
-.stat img{
+.stat img {
     width: 20px;
     height: 20px;
     margin: 0 5px;
 }
 
-.direction-arrows{
+/* ===== Navigation Arrows ===== */
+.direction-arrows {
     width: 60px;
     height: 60px;
     background-color: rgba(242, 242, 242, 0.5);
     border-radius: 50%;
     margin: 0 20px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
 }
 
-.direction-arrows.disabled{
-    cursor:not-allowed;
+.direction-arrows:hover {
+    background-color: rgba(255, 255, 255, 0.75);
+}
+
+.direction-arrows.disabled {
+    opacity: 0.28;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* ===== Utility ===== */
+.hidden {
+    display: none;
+}
+
+.card-icons {
+    font-size: 40px;
 }
 
 /* ===== Admin Panel ===== */
@@ -330,23 +313,24 @@ main{
 }
 
 .stat-box {
-    background: white;
+    background: #ffffff;
     width: 32%;
     padding: 20px;
     border-radius: 10px;
     text-align: center;
-    box-shadow: 0px 3px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
 }
 
 table {
     width: 100%;
-    background: white;
+    background: #ffffff;
     border-radius: 10px;
     border-collapse: collapse;
     overflow: hidden;
 }
 
-table th, table td {
+table th,
+table td {
     padding: 12px;
     text-align: left;
 }
@@ -359,10 +343,103 @@ table tr:nth-child(even) {
     background: #f2f2f2;
 }
 
-.hidden{
-    display: none;
+/* ===== Responsive ===== */
+/* Tablet */
+@media (max-width: 900px) {
+    .cards {
+        flex-wrap: wrap;
+        padding: 30px;
+        gap: 16px;
+    }
+    .card {
+        width: calc(50% - 10px);
+    }
+    .hero {
+        padding: 40px 30px;
+    }
+    .emergency {
+        margin: 20px 30px;
+    }
+    .welcome-box {
+        /* margin-left: 24px; */
+        width: auto;
+    }
 }
 
-.card-icons{
-    font-size: 40px;
+/* Mobile */
+@media (max-width: 640px) {
+    #navbar {
+        padding: 15px 20px;
+    }
+    .nav-center {
+        display: none;
+    }
+
+    .hero {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 36px 20px 28px;
+        gap: 20px;
+    }
+    .hero-text {
+        width: 100%;
+    }
+    .hero-text h1 {
+        font-size: 30px;
+    }
+    .hero-text p {
+        font-size: 15px;
+    }
+    .hero-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
+    .hero-buttons .btn {
+        width: 100%;
+        max-width: 280px;
+        text-align: center;
+        font-size: 14px;
+    }
+
+    .cards {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        gap: 14px;
+    }
+    .card {
+        width: 100%;
+        max-width: 360px;
+    }
+
+    .emergency {
+        margin: 14px 20px 24px;
+        font-size: 13px;
+    }
+
+    .welcome-box {
+        /* margin-left: 16px; */
+        margin-right: auto;
+        width: auto;
+        max-width: none;
+        text-align: left;
+    }
+
+    .dashboard-container {
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+}
+
+/* Extra small */
+@media (max-width: 380px) {
+    .hero-text h1 {
+        font-size: 26px;
+    }
 }

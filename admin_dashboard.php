@@ -41,6 +41,17 @@ $adminName = htmlspecialchars($_SESSION['admin_name'] ?? 'Admin');
       border-radius: 20px; padding: 4px 14px; font-size: 13px; color: #fff;
       display: flex; align-items: center; gap: 8px;
     }
+    .hamburger { display:none; flex-direction:column; justify-content:center; gap:5px; cursor:pointer; background:none; border:none; padding:4px; }
+    .hamburger span { display:block; width:24px; height:2px; background:#fff; border-radius:2px; transition:all .3s; }
+    .hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity:0; }
+    .hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+    .mobile-menu { display:none; position:fixed; top:60px; left:0; width:100%; background:rgba(13,148,136,0.98); backdrop-filter:blur(10px); flex-direction:column; padding:16px 24px 20px; gap:0; z-index:99; box-shadow:0 8px 20px rgba(0,0,0,0.2); }
+    .mobile-menu.open { display:flex; }
+    .mobile-menu a { color:#fff; font-size:16px; font-weight:500; padding:13px 0; border-bottom:1px solid rgba(255,255,255,0.1); text-decoration:none; transition:color .2s; }
+    .mobile-menu a:last-child { border-bottom:none; }
+    .mobile-menu a:hover { color:#e75480; }
+    @media (max-width: 600px) { .hamburger { display:flex; } #navbar { padding: 0 20px; } }
 
     /* ── Layout ── */
     main { position: relative; z-index: 1; padding: 100px 20px 40px; max-width: 1000px; margin: auto; }
@@ -102,11 +113,22 @@ $adminName = htmlspecialchars($_SESSION['admin_name'] ?? 'Admin');
   <a class="logo" href="admin_dashboard.php">
     <img src="images/logo.png"> MotherGuide
   </a>
-  <div class="admin-badge">
-    <i class="fa-solid fa-user-shield"></i>
-    <span><?php echo $adminName; ?></span>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <div class="admin-badge">
+      <i class="fa-solid fa-user-shield"></i>
+      <span><?php echo $adminName; ?></span>
+    </div>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
+
+<nav class="mobile-menu" id="mobile-menu">
+  <a href="admin_dashboard.php"><i class="fa-solid fa-gauge" style="margin-right:8px"></i>Dashboard</a>
+  <a href="admin_add_tip.php"><i class="fa-solid fa-plus" style="margin-right:8px"></i>Add Tip</a>
+  <a href="logout.php"><i class="fa-solid fa-right-from-bracket" style="margin-right:8px"></i>Logout</a>
+</nav>
 
 <main>
   <div class="page-header">
@@ -156,6 +178,11 @@ $adminName = htmlspecialchars($_SESSION['admin_name'] ?? 'Admin');
 
 <script>
 let isManageOpen = false;
+
+function toggleMenu() {
+  document.getElementById('hamburger').classList.toggle('open');
+  document.getElementById('mobile-menu').classList.toggle('open');
+}
 
 async function toggleManage() {
   const section = document.getElementById("manage-section");

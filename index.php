@@ -143,7 +143,7 @@ $loggedIn = isset($_SESSION["user_id"]);
     <nav class="mobile-menu" id="mobile-menu">
         <a href="index.php">Home</a>
         <a href="#">About</a>
-        <a href="tips.html">Resources</a>
+        <a href="tips.php">Resources</a>
         <a href="#">Contact</a>
     </nav>
 

@@ -3,7 +3,6 @@ session_start();
 header('Content-Type: application/json; charset=utf-8');
 
 require_once '../php/Database.php';
-require_once '../php/Admin.php';
 
 // SECURITY: Only allow POST requests
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -27,11 +26,12 @@ $db   = new Database();
 $conn = $db->connect();
 
 // VALIDATION: Collect and sanitize input
+$tip_id         = isset($_POST['tip_id'])         ? trim($_POST['tip_id'])         : '';
 $title          = isset($_POST['title'])          ? trim($_POST['title'])          : '';
 $content        = isset($_POST['content'])        ? trim($_POST['content'])        : '';
 $pregnancy_week = isset($_POST['pregnancy_week']) ? (int)$_POST['pregnancy_week'] : 0;
 
-if (empty($title) || empty($content) || $pregnancy_week === 0) {
+if (empty($tip_id) || empty($title) || empty($content) || $pregnancy_week === 0) {
     http_response_code(400);
     echo json_encode(['status' => 'error', 'message' => 'All fields are required']);
     exit;
@@ -58,16 +58,30 @@ if ($pregnancy_week < 1 || $pregnancy_week > 40) {
     exit;
 }
 
-$admin  = new Admin($conn);
-$result = $admin->addTip($title, $content, $pregnancy_week);
+// FIX: bind_param was "ssis" but pregnancy_week is cast to int, so correct binding is "ssis"
+// tip_id is a string ID like "T0001", so the last param is "s" — correct as-is
+$stmt = $conn->prepare("UPDATE tips SET title = ?, content = ?, pregnancy_week = ? WHERE id = ?");
+if (!$stmt) {
+    http_response_code(500);
+    echo json_encode(['status' => 'error', 'message' => 'Query preparation failed: ' . $conn->error]);
+    exit;
+}
 
-$conn->close();
+$stmt->bind_param("ssis", $title, $content, $pregnancy_week, $tip_id);
 
-if ($result['status'] === 'success') {
-    http_response_code(201);
-    echo json_encode(['status' => 'success', 'id' => $result['id'], 'message' => 'Tip added successfully']);
+if ($stmt->execute()) {
+    // Check if any row was actually found/updated
+    if ($stmt->affected_rows === 0) {
+        http_response_code(404);
+        echo json_encode(['status' => 'error', 'message' => 'Tip not found']);
+    } else {
+        echo json_encode(['status' => 'success', 'message' => 'Tip updated successfully']);
+    }
 } else {
     http_response_code(500);
-    echo json_encode(['status' => 'error', 'message' => $result['message'] ?? 'Failed to add tip']);
+    echo json_encode(['status' => 'error', 'message' => $stmt->error]);
 }
+
+$stmt->close();
+$conn->close();
 ?>
